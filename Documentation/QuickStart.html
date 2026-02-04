@@ -1,0 +1,1056 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>IntelliCall AI - AI Voice Calling Agents for Lead & Campaign Automation SaaS Platform</title>
+    <style>
+        :root {
+            --primary-color: #8078F0;
+            --text-color: #334155;
+            --bg-color: #ffffff;
+            --sidebar-bg: #fbfbfe;
+            --border-color: #edeafc;
+            --code-bg: #f6f5ff;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+            line-height: 1.6;
+            color: var(--text-color);
+            margin: 0;
+            display: flex;
+            height: 100vh;
+        }
+
+        /* Sidebar Styles */
+        aside {
+            width: 280px;
+            background-color: var(--sidebar-bg);
+            border-right: 1px solid var(--border-color);
+            padding: 2rem 1rem;
+            overflow-y: auto;
+            flex-shrink: 0;
+            position: sticky;
+            top: 0;
+            height: 100vh;
+            box-sizing: border-box;
+        }
+
+        aside h2 {
+            font-size: 1.25rem;
+            margin-bottom: 1.5rem;
+            color: var(--primary-color);
+            padding-left: 1rem;
+        }
+
+        nav ul {
+            list-style: none;
+            padding: 0;
+        }
+
+        nav li {
+            margin-bottom: 0.5rem;
+        }
+
+        nav a {
+            display: block;
+            padding: 0.5rem 1rem;
+            color: var(--text-color);
+            text-decoration: none;
+            border-radius: 0.375rem;
+            transition: all 0.2s;
+            font-size: 0.95rem;
+        }
+
+        nav a:hover {
+            background-color: #f3f2ff;
+            color: var(--primary-color);
+        }
+
+        nav a.active {
+            background-color: #efedff;
+            color: var(--primary-color);
+            font-weight: 600;
+        }
+
+        /* Main Content Styles */
+        main {
+            flex: 1;
+            padding: 2rem 4rem;
+            overflow-y: auto;
+            scroll-behavior: smooth;
+        }
+
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            padding-bottom: 4rem;
+        }
+
+        /* Typography */
+        h1 {
+            font-size: 2.5rem;
+            margin-bottom: 1.5rem;
+            color: #1e293b;
+            border-bottom: 2px solid var(--border-color);
+            padding-bottom: 1rem;
+        }
+
+        h2 {
+            font-size: 2rem;
+            margin-top: 4rem;
+            margin-bottom: 1.5rem;
+            color: #1e293b;
+            border-bottom: 1px solid var(--border-color);
+            padding-bottom: 0.5rem;
+        }
+
+        section {
+            scroll-margin-top: 2rem;
+        }
+
+        h3 {
+            font-size: 1.5rem;
+            margin-top: 2.5rem;
+            margin-bottom: 1rem;
+            color: #334155;
+            font-weight: 600;
+        }
+
+        h4 {
+            font-size: 1.2rem;
+            margin-top: 1.5rem;
+            margin-bottom: 0.75rem;
+            color: #475569;
+            font-weight: 600;
+        }
+
+        p {
+            margin-bottom: 1rem;
+        }
+
+        a {
+            color: var(--primary-color);
+            text-decoration: none;
+        }
+
+        a:hover {
+            text-decoration: underline;
+        }
+
+        ul,
+        ol {
+            margin-bottom: 1.5rem;
+            padding-left: 2rem;
+        }
+
+        li {
+            margin-bottom: 0.5rem;
+        }
+
+        /* Code Blocks */
+        pre {
+            background-color: var(--code-bg);
+            padding: 1.25rem;
+            border-radius: 0.5rem;
+            overflow-x: auto;
+            margin-bottom: 1.5rem;
+            border: 1px solid var(--border-color);
+        }
+
+        code {
+            font-family: 'Menlo', 'Monaco', 'Courier New', monospace;
+            font-size: 0.9em;
+            color: #0f172a;
+        }
+
+        p code,
+        li code,
+        td code {
+            background-color: var(--code-bg);
+            padding: 0.2rem 0.4rem;
+            border-radius: 0.25rem;
+            border: 1px solid #e2e8f0;
+        }
+
+        /* Tables */
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-bottom: 2rem;
+            background-color: white;
+        }
+
+        th,
+        td {
+            padding: 1rem;
+            border: 1px solid var(--border-color);
+            text-align: left;
+            vertical-align: top;
+        }
+
+        th {
+            background-color: var(--sidebar-bg);
+            font-weight: 600;
+            color: #334155;
+        }
+
+        /* Copy Button */
+        .copy-btn {
+            float: right;
+            padding: 0.2rem 0.5rem;
+            font-size: 0.8rem;
+            background: white;
+            border: 1px solid var(--border-color);
+            cursor: pointer;
+            border-radius: 3px;
+        }
+
+        .badge {
+            display: inline-block;
+            padding: 0.25rem 0.5rem;
+            border-radius: 0.25rem;
+            font-size: 0.75rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            margin-left: 0.5rem;
+        }
+
+        .badge-new {
+            background-color: #dbeafe;
+            color: #1e40af;
+        }
+
+        /* Responsive */
+        @media (max-width: 1024px) {
+            main {
+                padding: 2rem;
+            }
+        }
+
+        @media (max-width: 768px) {
+            body {
+                flex-direction: column;
+                height: auto;
+            }
+
+            aside {
+                width: 100%;
+                height: auto;
+                position: relative;
+                border-right: none;
+                border-bottom: 1px solid var(--border-color);
+                padding: 1rem;
+            }
+
+            aside h2 {
+                margin-bottom: 1rem;
+            }
+
+            main {
+                padding: 1.5rem;
+                overflow: visible;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <aside>
+        <div style="text-align: left; margin-bottom: 1.5rem; padding-left: 1rem;">
+            <img src="./images/logo.png" alt="IntelliCall AI" style="max-width: 180px; height: auto;">
+        </div>
+        <nav>
+            <ul>
+                <!-- Overview -->
+                <li style="font-size: 0.75rem; color: #888; padding: 0.5rem 1rem 0.25rem; text-transform: uppercase; letter-spacing: 0.05em;">Overview</li>
+                <li><a href="#intro">Introduction</a></li>
+                <li><a href="#whats-new">📦 What's New v2</a></li>
+                <li><a href="#whats-included">What's Included</a></li>
+                <li><a href="#features">✨ Features</a></li>
+
+                <!-- Getting Started -->
+                <li style="font-size: 0.75rem; color: #888; padding: 0.75rem 1rem 0.25rem; text-transform: uppercase; letter-spacing: 0.05em;">Getting Started</li>
+                <li><a href="#prerequisites">📋 Requirements</a></li>
+                <li><a href="#easy-install">⚡ Easy Install</a></li>
+                <li><a href="#manual-setup">🔧 Manual Setup</a></li>
+
+                <!-- Configuration -->
+                <li style="font-size: 0.75rem; color: #888; padding: 0.75rem 1rem 0.25rem; text-transform: uppercase; letter-spacing: 0.05em;">Configuration</li>
+                <li><a href="#google-auth">🔐 Google OAuth</a></li>
+                <li><a href="#twilio-setup">📞 Twilio & ngrok</a></li>
+                <li><a href="#elevenlabs-config">🎙️ ElevenLabs (TTS)</a></li>
+                <li><a href="#deepgram-config">👂 Deepgram (STT)</a></li>
+                <li><a href="#openrouter-config">🧠 OpenRouter (LLM)</a></li>
+
+                <!-- Admin & SaaS -->
+                <li style="font-size: 0.75rem; color: #888; padding: 0.75rem 1rem 0.25rem; text-transform: uppercase; letter-spacing: 0.05em;">Admin & SaaS</li>
+                <li><a href="#admin-panel">👑 Admin Panel</a></li>
+                <li><a href="#user-roles">👥 User Roles</a></li>
+                <li><a href="#payment-gateways">💳 Payment Gateways</a></li>
+                <li><a href="#plans-billing">📊 Plans & Billing</a></li>
+
+                <!-- Using the Platform -->
+                <li style="font-size: 0.75rem; color: #888; padding: 0.75rem 1rem 0.25rem; text-transform: uppercase; letter-spacing: 0.05em;">Using the Platform</li>
+                <li><a href="#creating-agents">🤖 Creating AI Agents</a></li>
+                <li><a href="#creating-campaigns">📅 Creating Campaigns</a></li>
+                <li><a href="#call-logs-analytics">📊 Logs & Analytics</a></li>
+                <li><a href="#call-recording">⏺️ Call Recording</a></li>
+
+                <!-- Customization & Help -->
+                <li style="font-size: 0.75rem; color: #888; padding: 0.75rem 1rem 0.25rem; text-transform: uppercase; letter-spacing: 0.05em;">Customization & Help</li>
+                <li><a href="#frontend-custom">🎨 Frontend Customization</a></li>
+                <li><a href="#troubleshooting">❓ Troubleshooting</a></li>
+                <li><a href="#support">✉️ Support</a></li>
+            </ul>
+        </nav>
+    </aside>
+
+    <main>
+        <div class="container">
+            <!-- ==================== OVERVIEW ==================== -->
+
+            <section id="intro">
+                <h1>IntelliCall AI - AI Voice Calling Agents for Lead & Campaign Automation SaaS Platform</h1>
+                <p>Welcome to IntelliCall AI v2. This version includes full SaaS capabilities (plans, payments,
+                    multi-tenancy) on top of the powerful AI calling engine.</p>
+            </section>
+
+            <section id="whats-new">
+                <h2>📦 What's New in Version 2</h2>
+                <div class="grid"
+                    style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 1.5rem; margin-top: 1.5rem;">
+                    <div
+                        style="background: #fff; padding: 1.5rem; border: 1px solid var(--border-color); border-radius: 0.75rem;">
+                        <h3 style="margin-top: 0;">🚀 Full SaaS Architecture</h3>
+                        <p>Launch your own AI calling business. Users sign up, subscribe to plans, and manage their own
+                            agents and campaigns isolated from others.</p>
+                    </div>
+                    <div
+                        style="background: #fff; padding: 1.5rem; border: 1px solid var(--border-color); border-radius: 0.75rem;">
+                        <h3 style="margin-top: 0;">💳 Multi-Payment Support</h3>
+                        <p>Native integration with <strong>Stripe, PayPal, Razorpay, and Dodo Payments</strong>. Just
+                            add your keys and start accepting payments.</p>
+                    </div>
+                    <div
+                        style="background: #fff; padding: 1.5rem; border: 1px solid var(--border-color); border-radius: 0.75rem;">
+                        <h3 style="margin-top: 0;">🎨 Modern Landing Page</h3>
+                        <p>A high-converting, responsive landing page is included out of the box, fully integrated with
+                            the authentication and billing systems.</p>
+                    </div>
+                    <div
+                        style="background: #fff; padding: 1.5rem; border: 1px solid var(--border-color); border-radius: 0.75rem;">
+                        <h3 style="margin-top: 0;">👑 Super Admin Panel</h3>
+                        <p>Manage users, track revenue, create subscription plans, and configure system-wide settings
+                            from a dedicated admin route.</p>
+                    </div>
+                </div>
+            </section>
+
+            <section id="whats-included">
+                <h2>📦 What's Included</h2>
+                <ul>
+                    <li><strong>Backend API</strong> (Node.js/Express) - Core logic, telephony integration, and
+                        real-time streaming using WebSockets.</li>
+                    <li><strong>Frontend Dashboard</strong> (Next.js/React) - Administrative interface for managing
+                        leads, agents, and monitoring calls.</li>
+                    <li><strong>Telephony Integration</strong> (Twilio) - Seamless voice and media stream handling.</li>
+                    <li><strong>AI Integration</strong> - Customizable AI agents powered by OpenAI/Deepgram/etc.</li>
+                </ul>
+            </section>
+
+            <section id="features">
+                <h2>✨ Key Features</h2>
+
+                <div class="grid"
+                    style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 1.5rem; margin-top: 1.5rem;">
+                    <div
+                        style="background: #fff; padding: 1.5rem; border: 1px solid var(--border-color); border-radius: 0.75rem;">
+                        <h3 style="margin-top: 0; display: flex; align-items: center; gap: 0.5rem;">🧠 AI Intelligence
+                        </h3>
+                        <ul style="padding-left: 1.25rem;">
+                            <li><strong>Premium Voice (TTS)</strong>: Integration with ElevenLabs for human-like voices.
+                            </li>
+                            <li><strong>Real-time Understanding</strong>: Powered by Deepgram for ultra-low latency STT.
+                            </li>
+                            <li><strong>Advanced LLM Logic</strong>: Use GPT-4, Claude 3, and more via OpenRouter.</li>
+                            <li><strong>Custom AI Personas</strong>: Define goals, constraints, and personality for
+                                every agent.</li>
+                        </ul>
+                    </div>
+
+                    <div
+                        style="background: #fff; padding: 1.5rem; border: 1px solid var(--border-color); border-radius: 0.75rem;">
+                        <h3 style="margin-top: 0; display: flex; align-items: center; gap: 0.5rem;">📅 Campaign
+                            Operations</h3>
+                        <ul style="padding-left: 1.25rem;">
+                            <li><strong>Bulk Outbound Dialing</strong>: Automate thousands of calls with a single click.
+                            </li>
+                            <li><strong>Lead Management</strong>: Import CSVs, manage tags, and track qualification
+                                status.</li>
+                            <li><strong>Smart Retries</strong>: Handle busy lines, no-answers, and failed attempts.</li>
+                            <li><strong>Campaign Monitoring</strong>: Real-time progress tracking of active calling
+                                batches.</li>
+                        </ul>
+                    </div>
+
+                    <div
+                        style="background: #fff; padding: 1.5rem; border: 1px solid var(--border-color); border-radius: 0.75rem;">
+                        <h3 style="margin-top: 0; display: flex; align-items: center; gap: 0.5rem;">📊 Analytics &
+                            Insights</h3>
+                        <ul style="padding-left: 1.25rem;">
+                            <li><strong>Auto-Qualification</strong>: AI automatically scores leads based on
+                                conversation.</li>
+                            <li><strong>Call Summaries</strong>: Instant TL;DR generated right after the call ends.</li>
+                            <li><strong>Full Transcripts</strong>: Complete word-for-word history of every interaction.
+                            </li>
+                            <li><strong>Audio Recording</strong>: Built-in modern player for QA and agent training.</li>
+                        </ul>
+                    </div>
+
+                    <div
+                        style="background: #fff; padding: 1.5rem; border: 1px solid var(--border-color); border-radius: 0.75rem;">
+                        <h3 style="margin-top: 0; display: flex; align-items: center; gap: 0.5rem;">🔐 Enterprise Ready
+                        </h3>
+                        <ul style="padding-left: 1.25rem;">
+                            <li><strong>Google OAuth</strong>: Secure, unified login for your entire organization.</li>
+                            <li><strong>RBAC Security</strong>: Granular Admin and Member permission hierarchies.</li>
+                            <li><strong>Real-time Streams</strong>: High-performance bidirectional WebSocket
+                                architecture.</li>
+                            <li><strong>Responsive UI</strong>: Premium dark-mode dashboard that works on any device.
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </section>
+
+            <!-- ==================== GETTING STARTED ==================== -->
+
+            <section id="prerequisites">
+                <h2>📋 Requirements</h2>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Requirement</th>
+                            <th>Version/Target</th>
+                            <th>Download/Link</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Node.js</td>
+                            <td>18.x or higher</td>
+                            <td><a href="https://nodejs.org" target="_blank">nodejs.org</a></td>
+                        </tr>
+                        <tr>
+                            <td>MongoDB</td>
+                            <td>6.x or higher</td>
+                            <td><a href="https://mongodb.com/try/download/community" target="_blank">mongodb.com</a>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>Twilio Account</td>
+                            <td>Active Account</td>
+                            <td><a href="https://twilio.com" target="_blank">twilio.com</a></td>
+                        </tr>
+                        <tr>
+                            <td>Google Cloud</td>
+                            <td>OAuth 2.0 Client ID</td>
+                            <td><a href="https://console.cloud.google.com/" target="_blank">Cloud Console</a></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </section>
+
+            <section id="easy-install">
+                <h2>⚡ Easy Install (Recommended)</h2>
+                <p>The fastest way to get started is with our <strong>Setup & Customization Wizard</strong>. It handles
+                    environment configuration, dependency installation, and component linking automatically.</p>
+
+                <h3>Step 1: Run Setup Wizard</h3>
+                <img src="./images/1.png" alt="Setup Wizard" />
+
+                <p><strong>macOS / Linux:</strong></p>
+                <pre><code>cd Projects_v2/setup
+bash setup.sh</code></pre>
+
+                <p><strong>Windows (PowerShell as Admin):</strong></p>
+                <pre><code>cd Projects_v2/setup
+.\setup.ps1</code></pre>
+
+                <h3>Step 2: Follow the Prompts</h3>
+                <img src="./images/2.png" alt="Setup Wizard" />
+
+                <p>The wizard will guide you through:</p>
+                <ul>
+                    <li>✅ <strong>Dependency Checks</strong>: Ensures Node and npm are ready.</li>
+                    <li>✅ <strong>Database Setup</strong>: Connects and tests your MongoDB.</li>
+                    <li>✅ <strong>Auth Configuration</strong>: Prompts for Google Client IDs.</li>
+                    <li>✅ <strong>Environment Generation</strong>: Creates secure <code>.env</code> files for both
+                        backend and frontend.</li>
+                    <li>✅ <strong>ngrok Assistant</strong>: Built-in guide for local testing and Twilio webhook setup.
+                    </li>
+                    <li>✅ <strong>Auto-Validation</strong>: Tests the backend connection to ensure everything is
+                        perfect.</li>
+                </ul>
+
+                <img src="./images/3.png" alt="Setup Wizard" />
+
+                <p>🎉 <strong>Done!</strong> After setup, start your services using <code>npm run dev</code> in the
+                    backend and frontend folders.</p>
+            </section>
+
+            <section id="manual-setup">
+                <h2>🔧 Manual Setup (Advanced)</h2>
+                <p>While the wizard is recommended, you can set up each component manually if needed.</p>
+
+                <h3>Backend API Setup</h3>
+                <pre><code>cd Projects_v2/backend
+npm install
+cp .env.example .env</code></pre>
+
+                <h4>Required Backend Variables:</h4>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Variable</th>
+                            <th>Description</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><code>MONGODB_URI</code></td>
+                            <td>MongoDB connection string</td>
+                        </tr>
+                        <tr>
+                            <td><code>JWT_SECRET</code></td>
+                            <td>Secret for token generation</td>
+                        </tr>
+                        <tr>
+                            <td><code>GOOGLE_CLIENT_ID</code></td>
+                            <td>Google OAuth Client ID</td>
+                        </tr>
+                        <tr>
+                            <td><code>GOOGLE_CLIENT_SECRET</code></td>
+                            <td>Google OAuth Client Secret</td>
+                        </tr>
+                        <tr>
+                            <td><code>BASE_URL</code></td>
+                            <td>Your server's public URL</td>
+                        </tr>
+                    </tbody>
+                </table>
+
+                <h3>Frontend Dashboard Setup</h3>
+                <pre><code>cd Projects_v2/frontend
+npm install
+cp .env.example .env</code></pre>
+
+                <h4>Required Frontend Variable:</h4>
+                <p>Set <code>NEXT_PUBLIC_API_URL</code> to your backend endpoint (e.g.,
+                    <code>http://localhost:5001/api</code>).
+                </p>
+            </section>
+
+            <!-- ==================== CONFIGURATION ==================== -->
+
+            <section id="google-auth">
+                <h2>🔐 Google OAuth Setup</h2>
+                <img src="./images/google_oauth_search.png" alt="Google OAuth" />
+                <hr />
+                <img src="./images/google_oauth_createcred.png" alt="Google OAuth" />
+
+                <ol>
+                    <li>Create a new project in <a href="https://console.cloud.google.com/">Google Cloud Console</a>.
+                    </li>
+                    <li>Enable **OAuth Consent Screen** and add <code>email</code> and <code>profile</code> scopes.</li>
+                    <li>Create **OAuth 2.0 Client IDs** (Web Application).</li>
+                    <li>Add Authorized Redirect URI: <code>[BASE_URL]/api/auth/google/callback</code>.</li>
+                    <li>Copy Client ID and Secret to your backend <code>.env</code> file.</li>
+                </ol>
+            </section>
+
+            <section id="twilio-setup">
+                <h2>📞 Twilio Configuration</h2>
+                <p>Twilio is the communication backbone that enables the platform to place outbound calls and handle
+                    voice streams.</p>
+                <ol>
+                    <li>Log in to the <a href="https://twilio.com/console" target="_blank">Twilio Console</a>.</li>
+                    <li>Obtain your <strong>Account SID</strong> and <strong>Auth Token</strong> from the Account
+                        Dashboard.</li>
+                    <img src="./images/twilio.png" alt="Twilio" />
+                    <li>Get a voice-capable <strong>Twilio Phone Number</strong>.</li>
+                    <li>In the IntelliCall AI Dashboard, navigate to <strong>Settings > API Keys</strong>.</li>
+                    <li>Enter your SID, Token, and Phone Number (in E.164 format, e.g., <code>+1234567890</code>).</li>
+                    <li><strong>Crucial Step</strong>: Ensure your <code>BASE_URL</code> is correctly set in your
+                        backend <code>.env</code> file (e.g., your ngrok URL or public domain). The platform uses this
+                        to tell Twilio where to send voice and status updates.</li>
+                </ol>
+
+                <div
+                    style="background-color: #f6f5ff; border: 1px solid #edeafc; padding: 1.5rem; border-radius: 0.5rem; margin-top: 1.5rem;">
+                    <h3 style="margin-top: 0; color: var(--primary-color);">🌍 Local Testing with ngrok</h3>
+                    <p>Twilio needs a public URL to send events (like voice streams) to your local machine.
+                        <strong>ngrok</strong> creates a secure tunnel from the internet to your local server.
+                    </p>
+
+                    <h4>1. Install ngrok</h4>
+                    <ul>
+                        <li><strong>Windows:</strong> Download the ZIP from <a href="https://ngrok.com/download"
+                                target="_blank">ngrok.com</a>, extract it, and run the <code>.exe</code>.</li>
+                        <li><strong>macOS (Homebrew):</strong> Run <code>brew install ngrok/ngrok/ngrok</code>.</li>
+                        <li><strong>Linux:</strong> Use
+                            <code>curl -s https://ngrok-agent.s3.amazonaws.com/ngrok.asc | sudo tee /etc/apt/trusted.gpg.d/ngrok.asc >/dev/null && echo "deb https://ngrok-agent.s3.amazonaws.com buster main" | sudo tee /etc/apt/sources.list.d/ngrok.list && sudo apt update && sudo apt install ngrok</code>.
+                        </li>
+                    </ul>
+
+                    <h4>2. Connect your account</h4>
+                    <p>Signup at <a href="https://dashboard.ngrok.com/signup" target="_blank">ngrok.com</a> and get your
+                        <strong>Authtoken</strong>. Run this in your terminal:
+                    </p>
+                    <pre><code>ngrok config add-authtoken YOUR_AUTHTOKEN_HERE</code></pre>
+
+                    <h4>3. Start the tunnel</h4>
+                    <p>Start your backend (default port 5001) and then run:</p>
+                    <pre><code>ngrok http 5001</code></pre>
+
+                    <h4>4. Copy the URL</h4>
+                    <img src="./images/ngrok.png" alt="ngrok" />
+
+                    <p>Copy the <strong>Forwarding</strong> URL (e.g., <code>https://a1b2-c3d4.ngrok-free.app</code>)
+                        and use it as your <code>BASE_URL</code> in the backend <code>.env</code> file.</p>
+                    <p><em>Note: If using the free version, your URL changes every time you restart ngrok. Remember to
+                            update your <code>.env</code> and Settings accordingly!</em></p>
+                </div>
+            </section>
+
+            <section id="elevenlabs-config">
+                <h2>🎙️ ElevenLabs Configuration (TTS)</h2>
+                <p>ElevenLabs provides the high-quality Text-to-Speech (TTS) engine that gives your AI agent its voice.
+                </p>
+                <ol>
+                    <li>Get your API Key from the <a href="https://elevenlabs.io/app/developers/api-keys"
+                            target="_blank">ElevenLabs Developer Settings</a>.</li>
+                    <img src="./images/elevenlabs.png" alt="elevenlabs" />
+
+                    <li>In the IntelliCall AI Dashboard, go to <strong>Settings > API Keys</strong>.</li>
+                    <li>Paste your key into the <strong>ElevenLabs API Key</strong> field and click <strong>Save
+                            Changes</strong>.</li>
+                </ol>
+            </section>
+
+            <section id="deepgram-config">
+                <h2>👂 Deepgram Configuration (STT)</h2>
+                <p>Deepgram powers the Speech-to-Text (STT) engine, allowing the AI to understand the lead's voice in
+                    real-time with ultra-low latency.</p>
+                <ol>
+                    <img src="./images/deepgram.png" alt="deepgram" />
+                    <li>Create an account and generate an API key at <a href="https://console.deepgram.com/"
+                            target="_blank">console.deepgram.com</a> (under the <strong>API Keys</strong> section).</li>
+                    <li>In the IntelliCall AI Dashboard, go to <strong>Settings > API Keys</strong>.</li>
+                    <li>Paste your key into the <strong>Deepgram API Key</strong> field and click <strong>Save
+                            Changes</strong>.</li>
+                </ol>
+            </section>
+
+            <section id="openrouter-config">
+                <h2>🧠 OpenRouter Setup (LLM)</h2>
+                <p>OpenRouter is used to access advanced Large Language Models (like GPT-4 or Claude 3) that drive the
+                    conversation logic and call analysis.</p>
+                <ol>
+                    <img src="./images/openrouter.png" alt="openrouter" />
+                    <li>Generate your API Key at <a href="https://openrouter.ai/settings/keys"
+                            target="_blank">openrouter.ai/settings/keys</a>.</li>
+                    <li>In the IntelliCall AI Dashboard, go to <strong>Settings > API Keys</strong>.</li>
+                    <li>Paste your key into the <strong>OpenRouter API Key</strong> field and click <strong>Save
+                            Changes</strong>.</li>
+                </ol>
+
+                <p>Update all the settings in the <strong>Settings</strong> page.</p>
+                <img style="max-width: 900px;" src="./images/settings.png" alt="settings" />
+            </section>
+
+            <!-- ==================== ADMIN & SAAS ==================== -->
+
+            <section id="admin-panel">
+                <h2>👑 Admin Panel Guide</h2>
+                <p>The Admin Panel is the control center for your SaaS. It is accessible only to users with the
+                    <code>admin</code> role.
+                </p>
+                <p><strong>To access:</strong> Log in as an admin and navigate to <code>/admin</code> or click "Admin"
+                    in the sidebar.</p>
+
+                <div
+                    style="background-color: #f0f7ff; border-left: 4px solid #007bff; padding: 1rem; border-radius: 0.5rem; margin: 1.5rem 0;">
+                    <p style="margin: 0;"><strong>🛡️ First User as Admin:</strong> The very first user to sign up on your platform is automatically assigned the <strong>Admin</strong> role. All subsequent users will be assigned the <strong>Member</strong> role by default. You can manage user roles from the User Management section.</p>
+                </div>
+
+                <h3>1. User Management</h3>
+                <p>View all registered users, their email addresses, and subscription status.</p>
+                <img style="max-width: 900px;" src="./images/user_management.png" alt="User Management" />
+
+                <h3>2. Plan Management (<code>/admin/plans</code>)</h3>
+                <p>Define the tiers for your SaaS (e.g., Free, Pro, Enterprise). You can configure:</p>
+                <ul>
+                    <li><strong>Name & Description</strong>: Visible on the pricing page.</li>
+                    <li><strong>Price & Interval</strong>: Monthly, Yearly, or One-time.</li>
+                    <li><strong>Resource Limits</strong>:
+                        <ul>
+                            <li>Max Agents</li>
+                            <li>Max Campaigns</li>
+                            <li>Lead Capacity</li>
+                            <li>Total Calls/Minutes per month</li>
+                        </ul>
+                    </li>
+                </ul>
+                <img style="max-width: 900px;" src="./images/plan_management.png" alt="Plan Management" />
+
+                <h3>3. Purchase History (<code>/admin/purchases</code>)</h3>
+                <p>Track all transactions across all payment gateways. View status (Success, Failed), user, plan, and
+                    amount.</p>
+                <img style="max-width: 900px;" src="./images/purchase_history.png" alt="Purchase History" />
+
+                <h3>4. Gateway Settings (<code>/admin/gateways</code>)</h3>
+                <p>Enable/Disable specific payment providers and manage their API keys directly from the UI.</p>
+                <img style="max-width: 900px;" src="./images/gateway_settings.png" alt="Gateway Settings" />
+            </section>
+
+            <section id="user-roles">
+                <h2>👥 User Roles</h2>
+                <p>IntelliCall AI supports two primary user roles for secure collaboration within your platform.</p>
+
+                <div
+                    style="background-color: #f0f7ff; border-left: 4px solid #007bff; padding: 1rem; border-radius: 0.5rem; margin: 1.5rem 0;">
+                    <p style="margin: 0;"><strong>🛡️ Initial Admin Assignment:</strong> The very first user to create
+                        an account on your platform (via Google OAuth or manual signup) is automatically granted the
+                        <strong>Admin</strong> role. Subsequent users are assigned the <strong>Member</strong> role by
+                        default.
+                    </p>
+                </div>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Role</th>
+                            <th>Permissions</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><strong>Admin</strong></td>
+                            <td>Full access to all features, including System Settings, API Key management, and User
+                                management. This role is assigned to the first registered user.</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Member</strong></td>
+                            <td>Can manage leads, agents, and campaigns, but cannot access global system settings or
+                                manage other users.</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </section>
+
+            <section id="payment-gateways">
+                <h2>💳 Payment Gateways Setup</h2>
+                <p>IntelliCall AI v2 supports 4 major payment providers. You can enable any combination of them.</p>
+                <p>Go to <strong>Admin Panel > Gateways</strong> to configure these.</p>
+
+                <div
+                    style="background-color: #f6f5ff; border: 1px solid #edeafc; padding: 1.5rem; border-radius: 0.5rem; margin-bottom: 1.5rem;">
+                    <h3 style="margin-top: 0; display: flex; align-items: center; gap: 0.5rem;">
+                        <img src="./images/gateways/stripe.png" style="height: 24px;"> Stripe
+                    </h3>
+                    <ol>
+                        <li>Go to <a href="https://dashboard.stripe.com/apikeys" target="_blank">Stripe Developer
+                                Dashboard</a>.</li>
+                        <li>Copy your <strong>Publishable Key</strong> (pk_...) and <strong>Secret Key</strong>
+                            (sk_...).</li>
+                        <li>Paste them into the Stripe section in the Admin Panel.</li>
+                        <li>Toggle <strong>Enabled</strong> to On.</li>
+                    </ol>
+                    <img style="max-width: 100%; border-radius: 0.5rem; margin-top: 1rem;" src="./images/stripe.png" alt="Stripe Configuration" />
+                </div>
+
+                <div
+                    style="background-color: #f6f5ff; border: 1px solid #edeafc; padding: 1.5rem; border-radius: 0.5rem; margin-bottom: 1.5rem;">
+                    <h3 style="margin-top: 0; display: flex; align-items: center; gap: 0.5rem;">
+                        <img src="./images/gateways/paypal.png" style="height: 24px;"> PayPal
+                    </h3>
+                    <ol>
+                        <li>Go to <a href="https://developer.paypal.com/dashboard/" target="_blank">PayPal Developer
+                                Dashboard</a>.</li>
+                        <li>Create a new App. Copy the <strong>Client ID</strong> and <strong>Secret Key</strong>.</li>
+                        <li>Paste them into the PayPal section in the Admin Panel.</li>
+                        <li>Toggle <strong>Enabled</strong> to On.</li>
+                        <li>For testing, refer to the <a href="https://developer.paypal.com/tools/sandbox/"
+                                target="_blank">PayPal Sandbox Guide</a>.</li>
+                    </ol>
+                    <img style="max-width: 100%; border-radius: 0.5rem; margin-top: 1rem;" src="./images/paypal.png" alt="PayPal Configuration" />
+                </div>
+
+                <div
+                    style="background-color: #f6f5ff; border: 1px solid #edeafc; padding: 1.5rem; border-radius: 0.5rem; margin-bottom: 1.5rem;">
+                    <h3 style="margin-top: 0; display: flex; align-items: center; gap: 0.5rem;">
+                        <img src="./images/gateways/razorpay.png" style="height: 24px;"> Razorpay
+                    </h3>
+                    <ol>
+                        <li>Go to <a href="https://dashboard.razorpay.com/app/keys" target="_blank">Razorpay
+                                Dashboard</a>.</li>
+                        <li>Generate a new Key. Copy <strong>Key ID</strong> and <strong>Key Secret</strong>.</li>
+                        <li>Paste them into the Razorpay section in the Admin Panel.</li>
+                    </ol>
+                    <img style="max-width: 100%; border-radius: 0.5rem; margin-top: 1rem;" src="./images/razorpay.png" alt="Razorpay Configuration" />
+                </div>
+
+                <div
+                    style="background-color: #f6f5ff; border: 1px solid #edeafc; padding: 1.5rem; border-radius: 0.5rem;">
+                    <h3 style="margin-top: 0; display: flex; align-items: center; gap: 0.5rem;">
+                        <img src="./images/gateways/dodopayments.png" style="height: 24px;"> Dodo Payments
+                    </h3>
+                    <ol>
+                        <li>Go to <a href="https://app.dodopayments.com/developer/api-keys" target="_blank">Dodo
+                                Payments Dashboard</a>.</li>
+                        <li>Copy your <strong>API Key</strong>.</li>
+                        <li>If you are using Product IDs for plans, ensure the <strong>Dodo Product ID</strong> field in
+                            your Plan config matches the product ID in Dodo.</li>
+                        <li><strong>Webhook Setup (Important):</strong></li>
+                        <ul>
+                            <li>Go to <a href="https://app.dodopayments.com/developer/webhooks" target="_blank">Dodo
+                                    Developer Webhooks</a>.</li>
+                            <li>Add a new Webhook Endpoint: <code>[BASE_URL]/api/payments/dodopayments/webhook</code>.
+                            </li>
+                            <li><strong>Local Testing:</strong> Ensure you have <strong>ngrok</strong> configured (see
+                                <a href="#twilio-setup">Twilio & ngrok section</a>) to get a public URL for your local
+                                server.
+                            </li>
+                        </ul>
+                    </ol>
+                    <img style="max-width: 100%; border-radius: 0.5rem; margin-top: 1rem;" src="./images/dodopayments.png" alt="Dodo Payments Configuration" />
+                    <img style="max-width: 100%; border-radius: 0.5rem; margin-top: 1rem;" src="./images/dodopayments_webhook.png" alt="Dodo Payments Webhook Setup" />
+                </div>
+            </section>
+
+            <section id="plans-billing">
+                <h2>📊 User Plans & Billing</h2>
+                <p>How users subscribe to your services:</p>
+                <ol>
+                    <li><strong>Sign Up</strong>: Users arrive at the landing page and click "Get Started".</li>
+                    <li><strong>Dashboard Access</strong>: New users (Member role) have restricted access based on the
+                        Free/Default plan limits.</li>
+                    <li><strong>Upgrade Flow</strong>:
+                        <ul>
+                            <li>User navigates to <strong>Settings > Plan & Billing</strong>.</li>
+                            <li>They see all active plans you created in the Admin Panel.</li>
+                            <li>They click "Upgrade", select a Payment Gateway, and complete the transaction.</li>
+                        </ul>
+                    </li>
+                    <li><strong>Instant Activation</strong>: Upon successful payment, their account limits (Agents,
+                        Calls,
+                        etc.) are instantly updated.</li>
+                </ol>
+            </section>
+
+            <!-- ==================== USING THE PLATFORM ==================== -->
+
+            <section id="creating-agents">
+                <h2>🤖 Creating AI Agents</h2>
+                <p>Agents are the "brains" of your calls. You can customize how they speak and behave.</p>
+                <ol>
+                    <li>Navigate to the <strong>AI Agents</strong> page in the dashboard.</li>
+                    <img style="max-width: 900px;" src="./images/agents.png" alt="agents" />
+                    <li>Click <strong>+ Create Agent</strong>.</li>
+                    <img style="max-width: 900px;" src="./images/create_agent.png" alt="create_agent" />
+                    <li><strong>Name</strong>: Give your agent a descriptive name (e.g., "Sales Assistant").</li>
+                    <li><strong>System Prompt</strong>: Define the agent's personality and goals (e.g., "You are a
+                        helpful sales representative for a solar company...").</li>
+                    <li><strong>Opening Message</strong>: This is the first thing the agent says when the lead answers.
+                        (Optional)</li>
+                    <li><strong>Voice Settings</strong>: Select a voice name (like "Rachel") or provide a custom
+                        ElevenLabs Voice ID for premium results.</li>
+                </ol>
+            </section>
+
+            <section id="creating-campaigns">
+                <h2>📅 Creating Campaigns</h2>
+                <p>Campaigns allow you to automate calls to a list of leads using a specific AI Agent.</p>
+                <ol>
+                    <li>Ensure you have imported leads in the <strong>Leads</strong> page.</li>
+                    <img style="max-width: 900px;" src="./images/campaign.png" alt="campaign" />
+                    <li>Go to the <strong>Campaigns</strong> page and click <strong>+ Create Campaign</strong>.</li>
+                    <li>Select the <strong>AI Agent</strong> you want to use.</li>
+                    <li>Select the <strong>Leads</strong> or specific tags you want to target.</li>
+                    <li>Click <strong>Start</strong> on the campaign card to begin the automated calling process.</li>
+                </ol>
+            </section>
+
+            <section id="call-logs-analytics">
+                <h2>📊 Call Logs & Analytics</h2>
+                <p>Monitor your performance with detailed conversation history and AI-driven insights.</p>
+                <ul>
+                    <li><strong>Viewing Logs</strong>: The <strong>Call Logs</strong> page shows every interaction,
+                        including the status, duration, and AI qualification score.</li>
+                    <img style="max-width: 900px;" src="./images/call_logs.png" alt="call_logs" />
+                    <li><strong>Conversation Details</strong>: Click <strong>Details</strong> on any log to see the full
+                        transcript between the AI and the lead.</li>
+                    <img style="max-width: 900px;" src="./images/call_logs_details.png" alt="call_logs_details" />
+                    <li><strong>Auto-Analysis</strong>: To enable automatic call summaries and qualification scores, go
+                        to <strong>Settings > Preferences</strong> and toggle <strong>Automatic Call Analysis</strong>
+                        ON. This uses OpenRouter to analyze the transcript immediately after the call ends.</li>
+                    <img style="max-width: 900px;" src="./images/call_logs_analysis_enable.png"
+                        alt="call_logs_analysis_enable" />
+                </ul>
+            </section>
+
+            <section id="call-recording">
+                <h2>⏺️ Call Recording</h2>
+                <p>Keep a record of all conversations for quality assurance and training.</p>
+                <ol>
+                    <li>Go to <strong>Settings > Preferences</strong>.</li>
+                    <li>Toggle <strong>Call Recording</strong> to ON.</li>
+                    <img style="max-width: 900px;" src="./images/call_recording_enable.png"
+                        alt="call_recording_enable" />
+                    <li>Once enabled, a play button will appear in the <strong>Call Logs</strong> table for all new
+                        calls.</li>
+                    <li>You can listen to recordings directly in the browser using the built-in modern audio player.
+                    </li>
+                </ol>
+            </section>
+
+            <!-- ==================== CUSTOMIZATION & HELP ==================== -->
+
+            <section id="frontend-custom">
+                <h2>🎨 Frontend Customization</h2>
+                <p>The solution includes a polished Next.js landing page. Here is how to make it yours:</p>
+                <img style="max-width: 900px;" src="./images/landing.png" alt="Landing Page" />
+
+                <h3>Landing Page (`frontend/app/page.tsx`)</h3>
+                <p>This file contains the Hero, Features, Pricing, and Testimonials sections.</p>
+                <ul>
+                    <li><strong>Hero Text:</strong> Search for <code>Automate Your Outbound Calls</code> to change the
+                        main headline.</li>
+                    <li><strong>Images/Colors:</strong> The theme uses <code>--primary-color</code> and Tailwind utility
+                        classes. Edit <code>frontend/app/globals.css</code> to change the brand color (default:
+                        <code>#8078F0</code>).
+                    </li>
+                    <li><strong>Testimonials:</strong> Located in the <code>Testimonials</code> section array. Update
+                        the text and author names.</li>
+                </ul>
+
+                <h3>Additional Pages</h3>
+                <p>You can find and edit these files to add your legal text and company info:</p>
+                <ul>
+                    <li><strong>About Us:</strong> <code>frontend/app/about/page.tsx</code></li>
+                    <li><strong>Contact:</strong> <code>frontend/app/contact/page.tsx</code></li>
+                    <li><strong>Privacy Policy:</strong> <code>frontend/app/privacy/page.tsx</code></li>
+                    <li><strong>Terms of Service:</strong> <code>frontend/app/terms/page.tsx</code></li>
+                </ul>
+            </section>
+
+            <section id="troubleshooting">
+                <h2>❓ Troubleshooting</h2>
+
+                <h3>Common Console Errors</h3>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Error Log</th>
+                            <th>Resolution</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><code>❌ Missing API keys for Custom Voice</code></td>
+                            <td>You enabled "Use Custom Voice" on an Agent but haven't provided Deepgram or ElevenLabs
+                                keys in <strong>Settings > API Keys</strong>.</td>
+                        </tr>
+                        <tr>
+                            <td><code>❌ Deepgram Error / ElevenLabs Error</code></td>
+                            <td>Verify your API keys are correct and have remaining credits. Ensure your firewall isn't
+                                blocking outbound WebSocket connections.</td>
+                        </tr>
+                        <tr>
+                            <td><code>❌ LLM Error / OpenRouter Error</code></td>
+                            <td>Check your OpenRouter API key and ensures you have a positive balance in your OpenRouter
+                                account.</td>
+                        </tr>
+                        <tr>
+                            <td><code>❌ Twilio Voice Webhook Error</code></td>
+                            <td>Your <code>BASE_URL</code> is likely unreachable by Twilio. Check your ngrok tunnel and
+                                ensure the URL in <code>.env</code> matches.</td>
+                        </tr>
+                        <tr>
+                            <td><code>❌ Could not find Agent or Lead</code></td>
+                            <td>The Call SID was received but the associated database records are missing. Ensure you
+                                haven't deleted the agent or lead while a call was in progress.</td>
+                        </tr>
+                    </tbody>
+                </table>
+
+                <h3 style="margin-top: 2rem;">"WebSocket connection failed"</h3>
+                <ul>
+                    <li>Ensure <code>BASE_URL</code> in backend <code>.env</code> is correct.</li>
+                    <li>If using ngrok, ensure the tunnel is active and the URL matches.</li>
+                </ul>
+
+                <h3>"Google Auth Error"</h3>
+                <ul>
+                    <li>Verify Redirect URIs in Google Console match exactly.</li>
+                    <li>Ensure <code>JWT_SECRET</code> is set in backend.</li>
+                </ul>
+
+                <h3>"Database connection error"</h3>
+                <ul>
+                    <li>Verify MongoDB service is running.</li>
+                    <li>Check if the IP is whitelisted (if using MongoDB Atlas).</li>
+                </ul>
+            </section>
+
+            <section id="support">
+                <h2>✉️ Need Technical Support?</h2>
+                <p>If you have purchased any of my products from CodeCanyon, you are eligible for free support. Open a
+                    ticket to get help with installation, bugs, or general queries.</p>
+                <p><strong>Support Portal:</strong> <a href="https://envato.aqeelshamz.com/"
+                        target="_blank">https://envato.aqeelshamz.com/</a></p>
+                <p><strong>Email:</strong> <a href="mailto:aqeelten@gmail.com">aqeelten@gmail.com</a></p>
+            </section>
+
+            <footer
+                style="margin-top: 5rem; padding-top: 2rem; border-top: 1px solid var(--border-color); text-align: center; color: #64748b;">
+                <p>&copy; 2026 Aqeel Shamsudheen. All rights reserved.</p>
+            </footer>
+        </div>
+    </main>
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const main = document.querySelector('main');
+            const navLinks = document.querySelectorAll('nav a');
+            const sections = document.querySelectorAll('section');
+
+            function highlightNavigation() {
+                let currentId = '';
+                sections.forEach(section => {
+                    const sectionTop = section.getBoundingClientRect().top;
+                    if (sectionTop < 300) {
+                        currentId = section.getAttribute('id');
+                    }
+                });
+                if (!currentId && sections.length > 0) {
+                    currentId = sections[0].getAttribute('id');
+                }
+                navLinks.forEach(link => {
+                    link.classList.remove('active');
+                    if (currentId && link.getAttribute('href') === `#${currentId}`) {
+                        link.classList.add('active');
+                    }
+                });
+            }
+
+            main.addEventListener('scroll', highlightNavigation);
+            window.addEventListener('resize', highlightNavigation);
+            highlightNavigation();
+        });
+    </script>
+</body>
+
+</html>
